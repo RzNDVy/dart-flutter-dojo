@@ -3,7 +3,7 @@ import AppSidebar from '@/components/AppSidebar';
 import LearningPage from '@/components/pages/LearningPage';
 import FlashcardPage from '@/components/pages/FlashcardPage';
 import QuizPage from '@/components/pages/QuizPage';
-import DuoModePage from '@/components/pages/DuoModePage';
+import GlobalCursorTracker from '@/components/GlobalCursorTracker';
 import { useAppStore } from '@/stores/appStore';
 
 const Index = () => {
@@ -17,8 +17,6 @@ const Index = () => {
         return <FlashcardPage />;
       case 'quiz':
         return <QuizPage />;
-      case 'duo':
-        return <DuoModePage />;
       default:
         return <LearningPage />;
     }
@@ -26,6 +24,9 @@ const Index = () => {
 
   return (
     <div className="flex min-h-screen bg-background">
+      {/* Global cursor tracking - shows other users' cursors */}
+      <GlobalCursorTracker />
+      
       <AppSidebar />
       <main className="flex-1 p-8 overflow-auto">
         <AnimatePresence mode="wait">

@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
-import { BookOpen, Layers, HelpCircle, Users, Sparkles } from 'lucide-react';
+import { BookOpen, Layers, HelpCircle, Sparkles } from 'lucide-react';
 import { useAppStore, PageType } from '@/stores/appStore';
 
 const navItems: { id: PageType; icon: React.ReactNode; label: string; emoji: string }[] = [
   { id: 'learning', icon: <BookOpen className="w-5 h-5" />, label: 'Pembelajaran', emoji: '📚' },
   { id: 'flashcard', icon: <Layers className="w-5 h-5" />, label: 'Flashcard', emoji: '🗂️' },
   { id: 'quiz', icon: <HelpCircle className="w-5 h-5" />, label: 'Quiz', emoji: '📝' },
-  { id: 'duo', icon: <Users className="w-5 h-5" />, label: 'Duo Mode', emoji: '✨' },
 ];
 
 const AppSidebar = () => {
