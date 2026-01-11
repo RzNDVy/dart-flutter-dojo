@@ -283,16 +283,65 @@ const QuizPage = () => {
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
+                {/* Result Header */}
                 <div className={`p-4 rounded-xl mb-4 ${
                   selectedAnswer === currentQuestion.correctIndex
-                    ? 'bg-mint/10 border border-mint/30'
-                    : 'bg-rose/10 border border-rose/30'
+                    ? 'bg-emerald-50 border-2 border-emerald-400'
+                    : 'bg-red-50 border-2 border-red-400'
                 }`}>
+                  <div className="flex items-center gap-2 mb-2">
+                    {selectedAnswer === currentQuestion.correctIndex ? (
+                      <>
+                        <CheckCircle className="w-5 h-5 text-emerald-600" />
+                        <span className="font-bold text-emerald-700">Benar! 🎉</span>
+                      </>
+                    ) : (
+                      <>
+                        <XCircle className="w-5 h-5 text-red-600" />
+                        <span className="font-bold text-red-700">Salah!</span>
+                      </>
+                    )}
+                  </div>
                   <p className="text-sm text-slate-700 leading-relaxed">
                     <span className="font-semibold">Penjelasan: </span>
                     {currentQuestion.explanation}
                   </p>
                 </div>
+
+                {/* Show correct answer if wrong */}
+                {selectedAnswer !== currentQuestion.correctIndex && (
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="p-4 rounded-xl mb-4 bg-emerald-50 border-2 border-emerald-300"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <CheckCircle className="w-5 h-5 text-emerald-600" />
+                      <span className="font-bold text-emerald-700">Jawaban yang benar:</span>
+                    </div>
+                    <p className="text-sm font-medium text-emerald-800 mb-1">
+                      {String.fromCharCode(65 + currentQuestion.correctIndex)}. {currentQuestion.options[currentQuestion.correctIndex]}
+                    </p>
+                  </motion.div>
+                )}
+
+                {/* Show wrong explanation for selected answer */}
+                {selectedAnswer !== currentQuestion.correctIndex && currentQuestion.wrongExplanations && currentQuestion.wrongExplanations[selectedAnswer] && (
+                  <motion.div
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3 }}
+                    className="p-4 rounded-xl mb-4 bg-amber-50 border-2 border-amber-300"
+                  >
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-amber-600 font-bold">💡 Mengapa {String.fromCharCode(65 + selectedAnswer)} salah?</span>
+                    </div>
+                    <p className="text-sm text-amber-800 leading-relaxed">
+                      {currentQuestion.wrongExplanations[selectedAnswer]}
+                    </p>
+                  </motion.div>
+                )}
 
                 <motion.button
                   whileHover={{ scale: 1.02 }}
